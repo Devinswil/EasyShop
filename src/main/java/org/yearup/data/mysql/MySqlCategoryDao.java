@@ -63,7 +63,7 @@ public class MySqlCategoryDao extends MySqlDaoBase implements CategoryDao {
             int affectedRows = statement.executeUpdate();
 
             if (affectedRows==0){
-                throw new SQLException("Creating category failed, no rows effected")
+                throw new SQLException("Creating category failed, no rows effected");
             }
 
             try(ResultSet generatedKeys = statement.getGeneratedKeys()){
