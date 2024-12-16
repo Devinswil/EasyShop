@@ -29,11 +29,11 @@ public class CategoriesController
     // create an Autowired controller to inject the categoryDao and ProductDao
 
     // add the appropriate annotation for a get action
-    @GetMapping("/")
+    @GetMapping("")
     public List<Category> getAll()
     {
-        // find and return all categories
-        return null;
+       List<Category>categories = categoryDao.getAllCategories();
+        return categories;
     }
 
     // add the appropriate annotation for a get action
