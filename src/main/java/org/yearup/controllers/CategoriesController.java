@@ -16,7 +16,7 @@ import java.util.List;
     // http://localhost:8080/categories
 // add annotation to allow cross site origin requests
 @RestController
-@RequestMapping("/categories")
+@RequestMapping("categories")
 @CrossOrigin
 public class CategoriesController
 {
@@ -33,8 +33,7 @@ public class CategoriesController
 
 
     // add the appropriate annotation for a get action
-    @GetMapping("")
-    @PreAuthorize("permitAll()")
+    @GetMapping()
     public List<Category> getAll()
     {
        List<Category>categories = categoryDao.getAllCategories();
@@ -42,7 +41,6 @@ public class CategoriesController
     }
 
   @GetMapping("{id}")
-  @PreAuthorize("permitAll()")
     public Category getById(@PathVariable int id)
     {
         return categoryDao.getById(id);
@@ -51,7 +49,6 @@ public class CategoriesController
     // the url to return all products in category 1 would look like this
     // https://localhost:8080/categories/1/products
     @GetMapping("{categoryId}/products")
-    @PreAuthorize("permitAll()")
     public List<Product> getProductsById(@PathVariable int categoryId)
     {
      List<Product>products= productDao.listByCategoryId(categoryId);
@@ -60,9 +57,9 @@ public class CategoriesController
 
     // add annotation to call this method for a POST action
     // add annotation to ensure that only an ADMIN can call this function
-    @PostMapping("")
-    @ResponseStatus(value = HttpStatus.CREATED)
+    @PostMapping()
     @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @ResponseStatus(value = HttpStatus.CREATED)
     public Category addCategory(@RequestBody Category category)
     {
 
@@ -82,8 +79,8 @@ public class CategoriesController
     // add annotation to call this method for a DELETE action - the url path must include the categoryId
     // add annotation to ensure that only an ADMIN can call this function
     @DeleteMapping("{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
     @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteCategory(@PathVariable int id)
     {
         categoryDao.delete(id);
