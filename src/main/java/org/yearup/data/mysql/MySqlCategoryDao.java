@@ -43,7 +43,7 @@ public class MySqlCategoryDao extends MySqlDaoBase implements CategoryDao {
             statement.setInt(1, categoryId);
             try (ResultSet resultSet = statement.executeQuery()) {
                 if (resultSet.next()) {
-                    mapRow(resultSet);
+                    return mapRow(resultSet);
                 }
             }
         } catch (SQLException e) {
@@ -87,6 +87,7 @@ public class MySqlCategoryDao extends MySqlDaoBase implements CategoryDao {
              PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, category.getName());
             statement.setString(2, category.getDescription());
+            statement.setInt(3,categoryId);
             int rows = statement.executeUpdate();
 
             if (rows == 0) {
@@ -99,7 +100,7 @@ public class MySqlCategoryDao extends MySqlDaoBase implements CategoryDao {
 
     @Override
     public void delete(int categoryId) {
-        String query = "DELETE FROM categories WHERE category_id";
+        String query = "DELETE FROM categories WHERE category_id = ?";
 
         try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
