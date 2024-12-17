@@ -38,9 +38,7 @@ public class CategoriesController {
         try {
             List<Category> categories = categoryDao.getAllCategories();
             return categories;
-        }
-        catch (Exception ex)
-        {
+        } catch (Exception ex) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Oops... our bad.");
         }
     }
@@ -66,9 +64,7 @@ public class CategoriesController {
         try {
             List<Product> products = productDao.listByCategoryId(categoryId);
             return products;
-        }
-        catch (Exception ex)
-        {
+        } catch (Exception ex) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Oops... our bad.");
         }
     }
@@ -81,9 +77,7 @@ public class CategoriesController {
     public Category addCategory(@RequestBody Category category) {
         try {
             return categoryDao.create(category);
-        }
-        catch (Exception ex)
-        {
+        } catch (Exception ex) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Oops... our bad.");
         }
 
@@ -96,9 +90,7 @@ public class CategoriesController {
     public void updateCategory(@PathVariable int id, @RequestBody Category category) {
         try {
             categoryDao.update(id, category);
-        }
-        catch (Exception ex)
-        {
+        } catch (Exception ex) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Oops... our bad.");
         }
     }
